@@ -20,7 +20,7 @@ public class DestroyEnemyBullet : MonoBehaviour
     {
         if (collision.gameObject.tag != "Enemy")
         {
-            gameObject.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             Destroy(gameObject, 0.3f);
         }
         else{

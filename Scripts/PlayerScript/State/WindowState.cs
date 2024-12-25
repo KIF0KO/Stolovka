@@ -55,7 +55,7 @@ public class WindowState : State
 
                 Ray ray = Manager.singlton.windowCamera.ScreenPointToRay(Input.mousePosition);
                 GameObject obj = Manager.singlton.Spawn(Manager.singlton.pizzaPref);
-                obj.GetComponent<Rigidbody>().linearVelocity = ray.direction * 10;
+                obj.GetComponent<Rigidbody>().velocity = ray.direction * 10;
 
                 PizzaHeap.Instance.PizzaEat();
 

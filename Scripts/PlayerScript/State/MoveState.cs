@@ -37,7 +37,7 @@ public class MoveState : State
     {
         float horDir = Input.GetAxis("Horizontal");
         float verDir = Input.GetAxis("Vertical");
-        pl.rb.linearVelocity = (pl.tr.forward * verDir + pl.tr.right * horDir) * speed;
+        pl.rb.velocity = (pl.tr.forward * verDir + pl.tr.right * horDir) * speed;
     }
     private void Look()
     {
