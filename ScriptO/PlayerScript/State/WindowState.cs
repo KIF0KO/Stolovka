@@ -14,7 +14,7 @@ public class WindowState : State
     {
         pl = Player.singlton;
         base.Enter();
-        Debug.Log("Я переключился в окно");
+        Debug.Log("пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ");
         Manager.singlton.CamChanger(1);
         Cursor.lockState = CursorLockMode.None;
         nextActionTime = Time.time;
@@ -48,7 +48,7 @@ public class WindowState : State
 
                 Ray ray = Manager.singlton.windowCamera.ScreenPointToRay(Input.mousePosition);
                 GameObject obj = Manager.singlton.Spawn(Manager.singlton.pizzaPref);
-                obj.GetComponent<Rigidbody>().velocity = ray.direction * 10;
+                obj.GetComponent<Rigidbody>().linearVelocity = ray.direction * 10;
 
                 PizzaHeap.Instance.PizzaEat();
 
