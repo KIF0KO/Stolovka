@@ -10,8 +10,10 @@ public class WindowState : State
     private Player pl;
     private float period = 0.5f;
     private float nextActionTime = 0;
+    private bool _canShoot;
     public override void Enter()
     {
+        PizzaHeap.Instance.SwitchPizzaShoot += CanShoot;
         pl = Player.singlton;
         base.Enter();
         Debug.Log("Я переключился в окно");
@@ -23,8 +25,10 @@ public class WindowState : State
         Enable();
     }
     public override void Exit() 
-    { 
-        base .Exit();
+    {
+        PizzaHeap.Instance.SwitchPizzaShoot -= CanShoot;
+
+        base.Exit();
         Manager.singlton.CamChanger(0);
         Cursor.lockState = CursorLockMode.Locked;
         Disable();
@@ -42,7 +46,10 @@ public class WindowState : State
     {
         if (Time.time > nextActionTime)
         {
-            
+            if (!_canShoot)
+            {
+                return;
+            }
             if (Input.GetMouseButton(0))
             {
 
@@ -86,5 +93,9 @@ public class WindowState : State
     private void Disable()
     {
         input.GamePlay.ExitState.performed -= OnExitPerfomend;
+    }
+    private void CanShoot(bool state)
+    {
+        _canShoot = state;
     }
 }

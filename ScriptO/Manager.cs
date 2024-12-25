@@ -10,6 +10,7 @@ public class Manager : MonoBehaviour
 
     public GameObject pizzaPref;
     public GameObject hotDogPref;
+
     private void Awake()
     {
         singlton = this;

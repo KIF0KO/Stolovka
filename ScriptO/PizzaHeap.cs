@@ -10,13 +10,16 @@ public class PizzaHeap : MonoBehaviour
     private int _pizzaInHeap = 0;
     public static PizzaHeap Instance;
 
+    public delegate void Switcher(bool state);
+    public event Switcher SwitchPizzaShoot;
+
     void Awake()
     {
         Instance = this;
     }
     void Start()
     {
-        _text.text = $"{_pizzaInHeap} / 27";
+        _text.text = $"{_pizzaInHeap}";
     }
     void Update()
     {
@@ -36,16 +39,27 @@ public class PizzaHeap : MonoBehaviour
         {
             PizzaPlusLayer(0);
         }
+        if (_pizzaInHeap != 0)
+        {
+            SwitchPizzaShoot(true);
+        }
     }
     public void PizzaCooked(int quantity = 1) 
     {
         _pizzaInHeap += quantity;
-        _text.text = $"{_pizzaInHeap} / 27";
+        
+        _text.text = $"{_pizzaInHeap}";
     }
     public void PizzaEat(int quantity = 1)
     {
         _pizzaInHeap -= quantity;
-        _text.text = $"{_pizzaInHeap} / 27";
+        if (_pizzaInHeap <= 0)
+        {
+            _pizzaInHeap = 0;
+            SwitchPizzaShoot(false);
+        }
+        _text.text = $"{_pizzaInHeap}";
+        
     }
     private void PizzaPlusLayer(int _activeLayerQuality)
     {
@@ -61,6 +75,7 @@ public class PizzaHeap : MonoBehaviour
             }
         }
     }
+
     //private void PizzaMinusLayer()
     //{
     //    if (_pizzaLayers > 0)
